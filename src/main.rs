@@ -1,50 +1,43 @@
 
-fn main() {
-    let v = vec![1,2,5,6,2,1,5,2,6,2,2,8,8,5,6,9,4,5,4,1,2,4,1,2,3,4,5,6,7,8,9];
+#[derive(Debug)]
+struct Point {
+    x: i32,
+    y: i32,
+}
 
-    for &i in &v {
-        let r = count(&v, i);
-        println!("{} is repeated {} times", i, r);
+#[derive(Debug)]
+enum Direccion {
+    Up(Point),
+    Down(Point),
+    Left(Point),
+    Right(Point),
+}
+
+#[derive(Debug)]
+enum Keys {
+    UpKey(String),
+    DownKey(String),
+    LeftKey(String),
+    RightKey(String),
+}
+
+impl Direccion {
+    fn match_direction(&self) -> Keys {
+        match self {
+            Direccion::Up(_) => Keys::UpKey(String::from("Pressed W")),
+            Direccion::Down(_) => Keys::DownKey(String::from("Pressed W")),
+            Direccion::Left(_) => Keys::LeftKey(String::from("Pressed W")),
+            Direccion::Right(_) => Keys::RightKey(String::from("Pressed W")),
+        }
     }
-
 }
 
-fn count(v: &Vec<i32>, val: i32) -> usize {
-    v.iter().filter(|&&x| x == val).count()
-    // v.iter().filter(|x| **x == val).count() //this is the same as above
+fn main() {
+    let u = Direccion::Up(Point { x: 0, y: 10 });
+
+    let v = Direccion::Down(Point { x: 20, y: 30 });
+
+    // let up = Direccion::Up(Point {x: 0, y: 0}).match_direction();
+    let up = u.match_direction();
+    println!("{:?}", up);
 }
-
-
-
-
-// fn main() {
-    
-//     let mut v = Vec::new();
-
-//     for i in 0..1000 {
-//         v.push(i);
-//     }
-
-//     println!("main still owns v: {}", v[200]);
-//     v = return_what_borrow(v);
-
-//     let y = &mut v;
-
-//     println!("main still owns v: {}", y[200]);
-//     y[200] = 666;
-//     println!("main y points to v: {}", y[200]);
-
-//     borrow_by_reference(y);
-
-    
-// }
-
-// fn return_what_borrow(mut v: Vec<i32>) -> Vec<i32> {
-//     v[200] = 333;
-//     println!("vec borrowed: {}", v[200]);
-//     v
-// }
-
-// fn borrow_by_reference(v: &Vec<i32>) {
-//     println!("vec borrowed by reference: {}", v[200]);
-// }
