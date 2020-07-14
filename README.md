@@ -53,3 +53,18 @@ impl Direccion {
     }
 }
 ```
+
+You can destruct the enum type:
+
+```
+impl Keys {
+    fn destruct(&self) -> &String {
+        match self {
+            Keys::UpKey(ref s) => s,
+            Keys::DownKey(ref s) => s,
+            Keys::LeftKey(ref s) => s,
+            Keys::RightKey(ref s) => s,
+        }
+    }
+}
+```

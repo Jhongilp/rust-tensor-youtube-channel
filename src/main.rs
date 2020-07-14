@@ -1,3 +1,4 @@
+#![allow(dead_code, unused_variables)]
 
 #[derive(Debug)]
 struct Point {
@@ -32,12 +33,24 @@ impl Direccion {
     }
 }
 
+impl Keys {
+    fn destruct(&self) -> &String {
+        match self {
+            Keys::UpKey(ref s) => s,
+            Keys::DownKey(ref s) => s,
+            Keys::LeftKey(ref s) => s,
+            Keys::RightKey(ref s) => s,
+        }
+    }
+}
+
 fn main() {
     let u = Direccion::Up(Point { x: 0, y: 10 });
 
     let v = Direccion::Down(Point { x: 20, y: 30 });
 
-    // let up = Direccion::Up(Point {x: 0, y: 0}).match_direction();
     let up = u.match_direction();
+    let up_s = up.destruct();
     println!("{:?}", up);
+    println!("{:?}", up_s);
 }
