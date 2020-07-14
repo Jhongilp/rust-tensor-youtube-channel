@@ -36,10 +36,10 @@ impl Direccion {
 impl Keys {
     fn destruct(&self) -> &String {
         match self {
-            Keys::UpKey(ref s) => s,
-            Keys::DownKey(ref s) => s,
-            Keys::LeftKey(ref s) => s,
-            Keys::RightKey(ref s) => s,
+            Keys::UpKey(s) => s,
+            Keys::DownKey(s) => s,
+            Keys::LeftKey(s) => s,
+            Keys::RightKey(s) => s,
         }
     }
 }
