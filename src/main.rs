@@ -62,6 +62,18 @@ impl Shape {
     }
 }
 
+
+// Option
+
+fn division(x: f64, y: f64) -> Option<f64> {
+    if y == 0.0 {
+        None
+    } else {
+        Some(x / y)
+    }
+}
+
+
 fn main() {
     let u = Direccion::Up(Point { x: 0, y: 10 });
 
@@ -77,5 +89,14 @@ fn main() {
     let c = Shape::Circle(50.0);
 
     let ar = r.area();
-    print!("rectangle area: {}", ar);
+    println!("rectangle area: {}", ar);
+
+    // Option
+
+    // let res = division(5.0, 0.0);
+    let res = division(5.0, 0.1125);
+    match res {
+        Some(x) => println!("division result: {:.2}", x), // two decimals
+        None => println!("cannot divide by zero"),
+    }
 }

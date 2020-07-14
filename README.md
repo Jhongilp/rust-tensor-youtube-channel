@@ -98,3 +98,26 @@ fn main() {
     print!("rectangle area: {}", ar);
 }
 ```
+
+## Option
+
+There is not null value in Rust, instead we use Option:
+
+```
+fn division(x: f64, y: f64) -> Option<f64> {
+    if y == 0.0 {
+        None
+    } else {
+        Some(x / y)
+    }
+}
+
+fn main() {
+    // let res = division(5.0, 0.0);
+    let res = division(5.0, 0.1125);
+    match res {
+        Some(x) => println!("division result: {:.2}", x), // two decimals
+        None => println!("cannot divide by zero"),
+    }
+}
+```
