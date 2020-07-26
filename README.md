@@ -18,3 +18,21 @@ You’ll use them most often in these situations:
 
 ### When you have a type whose size can’t be known at compile time and you want to use a value of that type in a context that requires an exact size
 
+In the following code, the List enum has an infinity size so the compiler will complain:
+
+```
+enum List {
+    Cons(i32, List),
+    End,
+}
+// error[E0072]: recursive type `List` has infinite size
+```
+
+That will be fixed using Box:
+```
+enum List {
+    Cons(i32, Box<List>),
+    End,
+}
+```
+
