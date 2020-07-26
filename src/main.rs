@@ -21,7 +21,11 @@ fn main() {
     let z = Box::new(y);
 
     if *x == *z {
-        println!("x a z have the same pointer");
+        println!("x a z has the same value: {} = {}", *x, *z);
     }
 
+    let address_y = format!("address y: {:p}", x);
+    let address_z = format!("address z: {:p}", z);
+    println!("{}", address_y);
+    println!("{}", address_z);
 }
