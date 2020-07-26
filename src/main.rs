@@ -1,50 +1,66 @@
+trait Shape {
+    fn area(&self) -> u32;
+}
+
+struct Rectangle {
+    x: u32,
+    y: u32,
+}
+
+struct Circle {
+    radius: f64,
+}
+
+impl Shape for Rectangle {
+    fn area(&self) -> u32 {
+        self.x * self.y
+    }
+}
+
+impl Shape for Circle {
+    fn area(&self) -> u32 {
+        (3.141 * self.radius * self.radius) as u32
+    }
+}
+
+// ++++++++
+
+struct Fib {
+    c: u32,
+    n: u32,
+}
+
+impl Iterator for Fib {
+    type Item = u32;
+
+    fn next(&mut self) -> Option<u32> {
+        let n = self.c + self.n;
+        self.c = self.n;
+        self.n = n;
+
+        Some(self.c)
+    }
+}
+
+fn fib() -> Fib {
+    Fib {c: 1, n: 1}
+}
+
 
 fn main() {
-    let v = vec![1,2,5,6,2,1,5,2,6,2,2,8,8,5,6,9,4,5,4,1,2,4,1,2,3,4,5,6,7,8,9];
-
-    for &i in &v {
-        let r = count(&v, i);
-        println!("{} is repeated {} times", i, r);
+    for j in fib().take(5) {
+        println!("{}", j);
     }
 
+    for j in fib().skip(14).take(10) {
+        println!("{}", j)
+    }
+
+    let mut f = fib();
+
+    println!("next: {:?}", f.next());
+    println!("next: {:?}", f.next());
+    println!("next: {:?}", f.next());
+    println!("next: {:?}", f.next());
+    println!("next: {:?}", f.next());
 }
-
-fn count(v: &Vec<i32>, val: i32) -> usize {
-    v.iter().filter(|&&x| x == val).count()
-    // v.iter().filter(|x| **x == val).count() //this is the same as above
-}
-
-
-
-
-// fn main() {
-    
-//     let mut v = Vec::new();
-
-//     for i in 0..1000 {
-//         v.push(i);
-//     }
-
-//     println!("main still owns v: {}", v[200]);
-//     v = return_what_borrow(v);
-
-//     let y = &mut v;
-
-//     println!("main still owns v: {}", y[200]);
-//     y[200] = 666;
-//     println!("main y points to v: {}", y[200]);
-
-//     borrow_by_reference(y);
-
-    
-// }
-
-// fn return_what_borrow(mut v: Vec<i32>) -> Vec<i32> {
-//     v[200] = 333;
-//     println!("vec borrowed: {}", v[200]);
-//     v
-// }
-
-// fn borrow_by_reference(v: &Vec<i32>) {
-//     println!("vec borrowed by reference: {}", v[200]);
-// }
